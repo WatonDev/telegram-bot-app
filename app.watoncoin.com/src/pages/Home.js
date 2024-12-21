@@ -6,20 +6,15 @@ const Home = ({ user }) => {
   const [points, setPoints] = useState(null);
 
   useEffect(() => {
-  if (!user?.points) {
-    fetchUserPoints()
-      .then((points) => {
-        console.log("Points fetched in Home (sync):", points);
-        setPoints(points);
-      })
-      .catch((err) => {
-        console.error("Error fetching user points in Home:", err);
-        setPoints(0);
-      });
-  } else {
-    setPoints(user.points); // Użyj danych z `user`, jeśli są dostępne
-  }
-}, [user]);
+  fetchUserPoints()
+    .then((points) => {
+      setPoints(points);
+    })
+    .catch((err) => {
+      console.error("Error fetching user points:", err);
+      setPoints(0);
+    });
+}, []);
 
   const photoUrl = user?.photo_url
     ? decodeURIComponent(user.photo_url)

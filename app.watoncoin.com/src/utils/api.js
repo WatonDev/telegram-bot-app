@@ -37,15 +37,13 @@ export const registerUser = async (initData) => {
 export const fetchUserPoints = async () => {
   try {
     const token = localStorage.getItem("jwtToken");
-    console.log("Token used in fetchUserPoints:", token); // Log tokena
-    const response = await axios.get("/users/points", {
+    const response = await apiClient.get("/api/points", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log("Fetched points:", response.data.points); // Log punktów
-    return response.data.points; // Zwrot punktów
+    return response.data.points;
   } catch (error) {
     console.error("Error fetching user points:", error.response?.data || error.message);
-    return 0; // Zwrot domyślnych punktów (0)
+    throw error;
   }
 };
 
@@ -62,14 +60,11 @@ export const markWelcomeSeen = async () => {
   }
 };
 
-export const fetchFriends = async (telegramId) => {
-  if (!telegramId) {
-    throw new Error("Telegram ID is required to fetch friends.");
-  }
-
+export const fetchFriends = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/friends`, {
-      params: { telegramId },
+    const token = localStorage.getItem("jwtToken");
+    const response = await apiClient.get("/api/friends", {
+      headers: { Authorization: `Bearer ${token}` },
     });
     return response.data.friends;
   } catch (error) {
@@ -85,18 +80,15 @@ export const generateReflink = (telegramId) => {
   return `https://t.me/watonapp_bot?start=ref_${telegramId}`;
 };
 
-export const fetchLeaderboard = async (telegramId) => {
+export const fetchLeaderboard = async () => {
   try {
     const token = localStorage.getItem("jwtToken");
-	console.log("Token used in fetchUserPoints:", token); // Dodaj log
-    const response = await axios.get("/api/leaderboard", {
-      params: { telegramId },
+    const response = await apiClient.get("/api/leaderboard", {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log("Fetched leaderboard data:", response.data);
-    return response.data; // Zwrot danych leaderboard
+    return response.data;
   } catch (error) {
     console.error("Error fetching leaderboard:", error.response?.data || error.message);
-    throw error; // Wyrzucenie błędu
+    throw error;
   }
 };

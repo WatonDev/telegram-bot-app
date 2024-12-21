@@ -26,17 +26,11 @@ const Frens = ({ user }) => {
   }, [user]);
 
   const handleCopy = () => {
-    if (user && user.telegram_id) {
-      const link = generateReflink(user.telegram_id);
-      navigator.clipboard.writeText(link);
-      toast.success("Reflink copied!", {
-        position: "top-center",
-        autoClose: 3000,
-      });
-    } else {
-      toast.error("Cannot generate referral link.");
-    }
-  };
+  const link = `https://t.me/watonapp_bot?start=ref_${user.telegram_id}`;
+  navigator.clipboard.writeText(link);
+  toast.success("Reflink copied!");
+};
+
 
   return (
     <div className="page-container">

@@ -8,72 +8,71 @@ import Tasks from "./pages/Tasks";
 import Stats from "./pages/Stats";
 import Frens from "./pages/Frens";
 import Premium from "./pages/Premium";
+import { registerUser } from "./utils/api"; // Import funkcji rejestracji
 import "./index.css";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const initApp = async () => {
-      try {
-        const initData = window.Telegram.WebApp.initData;
-
-        const response = await axios.post("/api/register", { initData });
-        const { user, token } = response.data;
-
-        setUser(user);
-        setToken(token);
-
-        localStorage.setItem("jwtToken", token);
-        localStorage.setItem("user", JSON.stringify(user));
-      } catch (error) {
-        console.error("Error initializing app:", error);
-      } finally {
-        setLoading(false);
+  const initApp = async () => {
+    try {
+      const initData = window.Telegram.WebApp.initData;
+      if (!initData) {
+        throw new Error("Telegram initData is missing");
       }
-    };
 
-    initApp();
-  }, []);
+      console.log("Telegram initData:", initData);
 
-const handleWelcomeComplete = async () => {
-  try {
-    const token = localStorage.getItem("jwtToken");
+      const user = await registerUser(initData);
+      console.log("User registered successfully:", user);
 
-    // Aktualizacja punktów użytkownika
-    await axios.post(
-      "/api/update-points",
-      { points: 1000 },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+      setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      console.error("Error during app initialization:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    // Oznaczenie ekranu Welcome jako widzianego
-    const response = await axios.post(
-      "/api/seen-welcome",
-      {},
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+  initApp();
+}, []);
 
-    if (response.data.success) {
-      setUser((prev) => {
-        console.log("Updating user state in Welcome:", {
-          ...prev,
-          seen_welcome: true,
-          points: 1000,
-        });
-        return {
+  const handleWelcomeComplete = async () => {
+    try {
+      const token = localStorage.getItem("jwtToken");
+
+      // Aktualizacja punktów użytkownika
+      await axios.post(
+        "/api/update-points",
+        { points: 1000 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // Oznaczenie ekranu Welcome jako widzianego
+      const response = await axios.post(
+        "/api/seen-welcome",
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data.success) {
+        setUser((prev) => ({
           ...prev,
           seen_welcome: true,
           points: 1000, // Aktualizuj punkty lokalnie
-        };
-      });
+        }));
+      }
+    } catch (error) {
+      console.error("Error completing Welcome:", error.response?.data || error.message);
     }
-  } catch (error) {
-    console.error("Error completing Welcome:", error.response?.data || error.message);
+  };
+
+  if (loading) {
+    return <LoadingScreen />;
   }
-};
 
   return (
     <Router>

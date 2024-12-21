@@ -62,24 +62,19 @@ const Welcome = ({ user, onComplete }) => {
 
 const handleFinish = async () => {
   try {
-    const targetPoints = isPremium ? 4000 : 1000;
     const token = localStorage.getItem("jwtToken");
 
-    // Aktualizacja punktów użytkownika
     const pointsResponse = await axios.post(
-      "/api/update-points",
-      { points: targetPoints },
+      `${process.env.REACT_APP_API_BASE_URL}/api/update-points`,
+      { points: 1000 },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("Points updated:", pointsResponse.data);
 
-    // Aktualizacja statusu powitalnego
     const welcomeResponse = await axios.post(
-      "/api/seen-welcome",
+      `${process.env.REACT_APP_API_BASE_URL}/api/seen-welcome`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log("Welcome status updated:", welcomeResponse.data);
 
     if (welcomeResponse.data.success) {
       onComplete();
