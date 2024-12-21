@@ -1,0 +1,44 @@
+{
+  "name": "app.watoncoin.com",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.2.1",
+    "@testing-library/react": "^13.4.0",
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.4.0",
+    "framer-motion": "^11.15.0",
+    "postcss": "^8.4.49",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0",
+    "react-scripts": "^5.0.1",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.10",
+    "tailwindcss": "^3.4.17",
+    "web-vitals": "^3.1.0"
+  },
+  "browserslist": {
+    "production": [
+      "chrome >= 100",
+      "ios_saf >= 15"
+    ],
+    "development": [
+      "chrome >= 100",
+      "ios_saf >= 15"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
+}

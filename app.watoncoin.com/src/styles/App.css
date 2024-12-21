@@ -1,0 +1,47 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.full-height {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.paper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1200px) {
+  body {
+    font-size: 16px;
+  }
+}

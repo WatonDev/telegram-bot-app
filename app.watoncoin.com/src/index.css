@@ -1,0 +1,112 @@
+/* Global reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1E3A8A, #1E40AF);
+    color: white;
+}
+
+.page-container {
+  padding: 20px;
+  text-align: center;
+  min-height: calc(100vh - 60px); /* Odjęcie wysokości menu */
+  box-sizing: border-box;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin: 15px auto;
+  padding: 15px;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  transform: translateY(-2px);
+}
+
+.menu-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #1f2937;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  color: #e5e7eb;
+  font-size: 14px;
+  z-index: 10; /* Zapewnienie, że menu zawsze będzie na wierzchu */
+}
+
+.menu-bar span {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.menu-bar span:hover {
+  color: #3b82f6;
+}
+
+.highlight {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card.highlight {
+  font-weight: bold;
+  background-color: #f0f8ff;
+}
+
+.table-container {
+  margin: 20px auto;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.table th {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: bold;
+}
+
+.table tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-rank {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ffd700;
+}

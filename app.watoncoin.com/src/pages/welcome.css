@@ -1,0 +1,208 @@
+/* Kontener główny */
+.welcome-container {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background: linear-gradient(135deg, #1E3A8A, #1E40AF);
+  color: white;
+  position: relative; /* Dla paginatora i tap hint */
+}
+
+/* Nagłówek */
+.welcome-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #FFD700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Logo i ikony */
+.icon-wrapper {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 150px;
+  animation: pulse 2s infinite;
+}
+
+.lightning-icon {
+  font-size: 60px;
+  color: #FFD700;
+  margin-bottom: 15px;
+  animation: flash 1s infinite;
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+/* Opisy */
+.slide-description {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 10px 0;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.6s ease forwards;
+}
+
+.slide-description:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.slide-description:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.slide-description:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes fade-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Podkreślenie punktów */
+.points-highlight {
+  font-size: 28px;
+  font-weight: bold;
+  color: #FFD700;
+  animation: bounce 1.5s infinite, count 3s ease-out forwards;
+}
+
+@keyframes count {
+  0% {
+    content: "0";
+  }
+  100% {
+    content: "1000";
+  }
+}
+
+/* Przycisk */
+.button-primary {
+  background: linear-gradient(135deg, #f59e0b, #f97316); /* Dynamiczne kolory gradientu */
+  border: none;
+  color: white;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.button-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Paginations */
+.pagination {
+  position: absolute;
+  bottom: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #7ca7f3;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.pagination .dot.active {
+  background-color: white;
+  transform: scale(1.5);
+  box-shadow: 0 0 10px white;
+}
+
+/* Informacja na dole */
+.tap-hint {
+  font-size: 14px;
+  margin-top: 10px; /* Odstęp od paginatora */
+  color: #7ca7f3;
+  position: absolute;
+  bottom: 20px; /* Umieszczenie pod paginator */
+  width: 100%;
+  text-align: center;
+}
+
+/* Animacje */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Klikalne obszary */
+.clickable-area {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%; /* Połowa ekranu */
+  z-index: 1;
+}
+
+.clickable-area.left {
+  left: 0;
+}
+
+.clickable-area.right {
+  right: 0;
+}
+
+/* Styl dla nieaktywnego obszaru */
+.clickable-area.inactive {
+  pointer-events: none; /* Wyłącza interakcję */
+  background: transparent; /* Zapobiega widocznemu podświetleniu */
+}
+
+.clickable-area:hover {
+  cursor: pointer;
+}
